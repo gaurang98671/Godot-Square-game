@@ -1,6 +1,5 @@
 extends Actor
 
-
 func _physics_process(delta: float) -> void:
 	var direction:= get_direction()
 	velocity= calculate_move_velocity(
@@ -27,3 +26,11 @@ func calculate_move_velocity(
 		if direction.y == -1.0:
 			new_velocity.y= speed.y * direction.y
 		return new_velocity
+
+
+
+
+
+
+
+
