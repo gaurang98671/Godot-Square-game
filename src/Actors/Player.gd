@@ -1,5 +1,10 @@
 extends Actor
 
+
+func _on_Enemy_Detector_body_entered(body: PhysicsBody2D) -> void:
+	queue_free()
+
+
 func _physics_process(delta: float) -> void:
 	var direction:= get_direction()
 	velocity= calculate_move_velocity(
@@ -26,6 +31,10 @@ func calculate_move_velocity(
 		if direction.y == -1.0:
 			new_velocity.y= speed.y * direction.y
 		return new_velocity
+
+
+
+
 
 
 
