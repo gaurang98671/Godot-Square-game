@@ -21,7 +21,6 @@ _global_script_class_icons={
 [application]
 
 config/name="First Game"
-run/main_scene="res://src/Levels/new scene.tscn"
 config/icon="res://icon.png"
 
 [input]
