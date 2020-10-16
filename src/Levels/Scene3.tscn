@@ -77,5 +77,5 @@ position = Vector2( 602.159, 514 )
 position = Vector2( 1106.81, 519.382 )
 
 [node name="Portal" parent="." instance=ExtResource( 6 )]
-position = Vector2( 478.694, 383.68 )
+position = Vector2( 1910.95, -69.794 )
 nextScene = "res://src/Levels/Scene2.tscn"
