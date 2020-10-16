@@ -15,7 +15,8 @@ func _physics_process(delta: float) -> void:
 	velocity= move_and_slide(velocity, FLOOR_NORMAL)
 
 func get_direction() ->Vector2:
-	 if Input.get_action_strength("move_right"):$AnimationPlayer.play("run")
+	 if Input.get_action_strength("move_right") and is_on_floor():$AnimationPlayer.play("run")
+	 elif Input.get_action_strength("move_left") and is_on_floor():$AnimationPlayer.play("run_back")
 	 else: $AnimationPlayer.stop()
 	
 	 return Vector2(

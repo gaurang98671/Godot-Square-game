@@ -1,13 +1,13 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://start-assets/DemoRpgCharacter.png" type="Texture" id=1]
 [ext_resource path="res://src/Actors/Player.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 22.97, 20.7088 )
+extents = Vector2( 28.7005, 27.1781 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 23.5151, 21.7805 )
+extents = Vector2( 29.0472, 27.9238 )
 
 [sub_resource type="Animation" id=3]
 resource_name = "run"
@@ -26,20 +26,37 @@ tracks/0/keys = {
 "values": [ 4, 5, 7 ]
 }
 
+[sub_resource type="Animation" id=4]
+resource_name = "run_back"
+length = 0.32
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("player:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 12, 13, 14, 15 ]
+}
+
 [node name="Player" type="KinematicBody2D"]
 collision_mask = 8
 script = ExtResource( 2 )
 
 [node name="player" type="Sprite" parent="."]
-position = Vector2( 3.79474, -37.6674 )
-scale = Vector2( 3.16355, 2.64235 )
+position = Vector2( 1.60756, -48.0795 )
+scale = Vector2( 3.80025, 3.35939 )
 texture = ExtResource( 1 )
 vframes = 5
 hframes = 4
-frame = 7
+frame = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 2.95326, -21.8214 )
+position = Vector2( 2.95326, -27.8214 )
 shape = SubResource( 1 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -56,9 +73,10 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy Detector"]
-position = Vector2( 6.00339, -21.5198 )
+position = Vector2( 6.00339, -27.5198 )
 shape = SubResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/run = SubResource( 3 )
+anims/run_back = SubResource( 4 )
 [connection signal="body_entered" from="Enemy Detector" to="." method="_on_Enemy_Detector_body_entered"]
