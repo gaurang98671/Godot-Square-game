@@ -1,31 +1,19 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://start-assets/DemoRpgCharacter.png" type="Texture" id=1]
 [ext_resource path="res://src/Actors/Player.gd" type="Script" id=2]
 
-[sub_resource type="ParticlesMaterial" id=5]
-lifetime_randomness = 0.3
-emission_shape = 1
-emission_sphere_radius = 5.17
-flag_disable_z = true
-gravity = Vector3( -30, 0, 0 )
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-scale = 4.0
-color = Color( 0.494118, 0.129412, 0.129412, 1 )
-
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 28.7005, 27.1781 )
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 29.0472, 27.9238 )
 
-[sub_resource type="Animation" id=3]
-resource_name = "run"
+[sub_resource type="Animation" id=4]
 length = 0.3
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("player:frame")
+tracks/0/path = NodePath("Particles2D/player:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -36,13 +24,24 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 4, 5, 7 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("Particles2D:process_material:gravity")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( -30, 0, 0 ) ]
+}
 
-[sub_resource type="Animation" id=4]
-resource_name = "run_back"
+[sub_resource type="Animation" id=5]
 length = 0.32
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("player:frame")
+tracks/0/path = NodePath("Particles2D/player:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -53,31 +52,53 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 12, 13, 14, 15 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("Particles2D:process_material:gravity")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 30, 0, 0 ) ]
+}
+
+[sub_resource type="Curve" id=6]
+_data = [ Vector2( 0.0771084, 0.494318 ), 0.0, 2.43776, 0, 0, Vector2( 0.925301, 0.148864 ), 0.815725, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=7]
+width = 2163
+curve = SubResource( 6 )
+
+[sub_resource type="ParticlesMaterial" id=1]
+lifetime_randomness = 0.38
+trail_divisor = 29
+trail_size_modifier = SubResource( 7 )
+emission_shape = 2
+emission_box_extents = Vector3( 6, 6, 1 )
+flag_disable_z = true
+spread = 84.7
+gravity = Vector3( -30, 0, 0 )
+angular_velocity = 73.67
+angular_velocity_random = 0.05
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = -46.9
+scale = 4.0
+color = Color( 0.917647, 0.921569, 0.933333, 1 )
+hue_variation = 0.12
+hue_variation_random = 0.13
 
 [node name="Player" type="KinematicBody2D"]
 collision_mask = 8
 script = ExtResource( 2 )
 
-[node name="player" type="Sprite" parent="."]
-position = Vector2( 1.60756, -48.0795 )
-scale = Vector2( 3.80025, 3.35939 )
-texture = ExtResource( 1 )
-vframes = 5
-hframes = 4
-frame = 15
-
-[node name="Particles2D" type="Particles2D" parent="player"]
-modulate = Color( 0.670588, 0.52549, 0.792157, 1 )
-use_parent_material = true
-position = Vector2( -5.71202, 6.20006 )
-amount = 37
-visibility_rect = Rect2( -17.9071, -2.43381, 21.2621, 5.33361 )
-local_coords = false
-process_material = SubResource( 5 )
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( 3.30681, -28.1749 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( -1.7818, -122.944 )
@@ -93,10 +114,32 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy Detector"]
+visible = false
 position = Vector2( 6.00339, -28.5805 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/run = SubResource( 3 )
-anims/run_back = SubResource( 4 )
+anims/run = SubResource( 4 )
+anims/run_back = SubResource( 5 )
+
+[node name="Particles2D" type="Particles2D" parent="."]
+modulate = Color( 0.933333, 0.933333, 0.933333, 1 )
+use_parent_material = true
+position = Vector2( -1.43275, -25.9914 )
+scale = Vector2( 3.80025, 3.35939 )
+amount = 1000
+lifetime = 1.5
+speed_scale = 1.89
+explosiveness = 0.07
+visibility_rect = Rect2( -17.9071, -2.43381, 21.2621, 5.33361 )
+local_coords = false
+process_material = SubResource( 1 )
+
+[node name="player" type="Sprite" parent="Particles2D"]
+position = Vector2( 0.0540698, -5.63743 )
+scale = Vector2( 1, 1 )
+texture = ExtResource( 1 )
+vframes = 5
+hframes = 4
+frame = 4
 [connection signal="body_entered" from="Enemy Detector" to="." method="_on_Enemy_Detector_body_entered"]
