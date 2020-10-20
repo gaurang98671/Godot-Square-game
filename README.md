@@ -3,4 +3,5 @@ Simple 2d game made with [Godot](https://github.com/godotengine/godot) game engi
 
 ![Alt Text](https://github.com/gaurang98671/Godot-Square-game/blob/main/gifs/game.gif)
 ![Alt Text](https://github.com/gaurang98671/Godot-Square-game/blob/main/gifs/final_animation.gif)
+![Alt Text](https://github.com/gaurang98671/Godot-Square-game/blob/main/gifs/run_anim.gif)
 
